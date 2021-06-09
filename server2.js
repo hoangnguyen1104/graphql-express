@@ -1,6 +1,11 @@
 var express = require('express');
 var express_graphql = require('express-graphql').graphqlHTTP;
 var {buildSchema} = require('graphql');
+const cors = require('cors');
+
+var app = express();    
+
+app.use(cors());
 
 // GraphQL Schema
 var schema = buildSchema(`
@@ -82,7 +87,6 @@ var root = {
 };
 
 // Create an expres server and a GraphQL endpoint
-var app = express();
 app.use('/graphql', express_graphql({
     schema: schema,
     rootValue: root,
